@@ -7,6 +7,7 @@ struct Person
     char name[20];
     float weight;
 }
+
 family_member;
 
 int main()
