@@ -26,7 +26,7 @@ void addToEnd(Node *&head, int number)
            current = current->next; // o atual recebe o proximo e percorre a lista
         }
         
-        current->next = newNode; //  se o próximo apontar para nulo nulo, agora ele irá apontar para o novo nó adicionado(o último)
+        current->next = newNode; //  se o próximo apontar para nulo, agora ele irá apontar para o novo nó adicionado(o último)
 
     }
 
