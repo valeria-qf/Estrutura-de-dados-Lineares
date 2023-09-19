@@ -68,4 +68,14 @@ int main()
         current = current->next;
     }
     printBackwards(current);
+
+    // Liberando a memória alocada para os nós
+    current = head;
+    while (current != nullptr) {
+        Node* temp = current;
+        current = current->next;
+        delete temp;
+    }
+
+
 }
