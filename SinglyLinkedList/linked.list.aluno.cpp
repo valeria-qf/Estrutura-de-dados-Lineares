@@ -35,7 +35,7 @@ void addToEnd(Node *&head, string nome, int idade)
 
 }
 
-void printList(Node *&head)
+void printList(Node *head)
 {
     Node *current = head;
     while(current != nullptr)
