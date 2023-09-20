@@ -120,21 +120,19 @@ class List
 
     }
 
-    bool existsInList(Node *node)
+    string existsInList(Node *node)
     {
         Node *current = head;
-        bool exist = false;
-
         while(current != nullptr)
         {
             if(current->getfirstNumber() == node->getfirstNumber() && current->getSecondNumber() == node->getSecondNumber())
             {   
-                exist = true;
+                return "Exists in the list";
             }
 
             current = current->next;
         }
-        return exist;
+        return "Doesn't exist";
     }
 
 };
@@ -150,8 +148,8 @@ int main()
     lista.addToStart(1, 2);
 
     Node *node = new Node(10, 20);
-    bool returnValue = lista.existsInList(node);
-    cout << "Return: " << returnValue << endl;
+    string returnString = lista.existsInList(node);
+    cout << "Return: " << returnString << endl;
     // lista.printList();
     // lista.deleteLastElement();
     // lista.deleteFirstElement();
