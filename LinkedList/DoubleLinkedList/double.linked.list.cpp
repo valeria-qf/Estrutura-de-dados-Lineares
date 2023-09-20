@@ -76,6 +76,6 @@ int main()
         current = current->next;
         delete temp;
     }
-
-
+    
+    return 0;
 }
