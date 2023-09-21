@@ -9,7 +9,7 @@ class Node
 
     public:
     Node *next;
-    Node(int firstNumber, int secondNumber)
+    Node(int firstNumber, int secondNumber) // Construtor
     {
         this->firstNumber = firstNumber;
         this->secondNumber = secondNumber;
@@ -17,12 +17,22 @@ class Node
 
     int getfirstNumber()
     {
-        return firstNumber;
+        return this->firstNumber;
     }
 
     int getSecondNumber()
     {
-        return secondNumber;
+        return this->secondNumber;
+    }
+
+    void setFirstNumber(int newFirstnumber)
+    {
+        firstNumber = newFirstnumber;
+    }
+
+    void setsecondNumber(int newsecondNumber)
+    {
+        secondNumber = newsecondNumber;
     }
 
 };
@@ -94,7 +104,7 @@ class List
             current = current->next;
             count++;
         }
-        cout << "\nSize of the list: " << count << endl;
+        cout << "Size of the list: " << count << endl;
     }
 
     void printList()
@@ -107,6 +117,63 @@ class List
             current = current->next;
         }
     }
+
+    bool existsInList(Node *node)
+    {
+        Node *current = head;
+        while(current != nullptr)
+        {
+            if(current->getfirstNumber() == node->getfirstNumber() && current->getSecondNumber() == node->getSecondNumber())
+            {   
+                return  true;
+            }
+
+            current = current->next;
+        }
+        return false;
+    }
+
+    void modifyNodeNumbers(int newFirstNumber, int newSecondNumber)
+    {   
+        Node *newNode = new Node(newFirstNumber, newSecondNumber);
+        newNode->next = head; // o próximo nó será o antigo head
+        head = newNode;
+        if(newNode != nullptr)
+        {
+            newNode->setFirstNumber(newFirstNumber);
+            newNode->setsecondNumber(newSecondNumber);
+        }
+    }
+
+    void printNodeNumbers(Node *newNode)
+    {
+        cout << "First Number: " << newNode->getfirstNumber() << ", Second Number: " << newNode->getSecondNumber() << endl;
+    }
+
+    void getNextNumber(Node *node)
+{
+    Node *current = head;
+    while (current != nullptr)
+    {
+        if (current->getfirstNumber() == node->getfirstNumber() && current->getSecondNumber() == node->getSecondNumber())
+        {
+            if (current->next != nullptr)
+            {
+                cout << "Next: N1: " << current->next->getfirstNumber() << ", N2: " << current->next->getSecondNumber() << endl;
+                return; // ENCERRA A VERIFICAÇÃO
+            }
+            
+            else
+            {
+                cout << "Next node does not exist." << endl;
+                return;
+            }
+        }
+        current = current->next;
+    }
+    cout << "Node not found in the list." << endl;
+}
+
     void clearMemory()
     {
         Node *current = head;
@@ -114,47 +181,27 @@ class List
         {
             Node *temp = current;
             current = current->next;
-            temp->next = nullptr;
             delete temp;
         }
 
     }
-
-    string existsInList(Node *node)
-    {
-        Node *current = head;
-        while(current != nullptr)
-        {
-            if(current->getfirstNumber() == node->getfirstNumber() && current->getSecondNumber() == node->getSecondNumber())
-            {   
-                return "Exists in the list";
-            }
-
-            current = current->next;
-        }
-        return "Doesn't exist";
-    }
-
 };
 
 int main()
 {
     List lista;
 
-    lista.addToEnd(10, 20);
     lista.addToEnd(11, 21);
     lista.addToEnd(11, 22);
     lista.addToEnd(1, 23);
-    lista.addToStart(1, 2);
 
-    Node *node = new Node(10, 20);
-    string returnString = lista.existsInList(node);
-    cout << "Return: " << returnString << endl;
-    // lista.printList();
-    // lista.deleteLastElement();
-    // lista.deleteFirstElement();
     lista.printList();
-    // lista.sizeOfTheList();
+
+    Node *newNode = new Node(11, 22);
+    // lista.modifyNodeNumbers(2, 1);
+    lista.printList();
+    cout << endl;
+    lista.getNextNumber(newNode);
 
     lista.clearMemory();
     
