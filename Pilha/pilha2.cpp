@@ -41,7 +41,7 @@ class Stack
     {
         if (isEmpty())
         {
-            cout << "A lista já está vazia!" << endl;
+            cout << "A pilha já está vazia!" << endl;
         }
 
         else
@@ -62,7 +62,7 @@ class Stack
     {
         if (isEmpty())
         {
-            cout << "A lista já está vazia!" << endl;
+            cout << "A pilha já está vazia!" << endl;
         }
 
         else
