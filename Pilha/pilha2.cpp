@@ -3,16 +3,15 @@ using namespace std;
 
 class Node
 {
-private:
+    private:
     int number;
 
-public:
+    public:
     Node *next;
-
     Node(int number)
-    {
+    {   
+        this->next = next;
         this->number = number;
-        this->next = nullptr;
     }
 
     int getNumber()
@@ -23,7 +22,7 @@ public:
 
 class Stack
 {
-public:
+    public:
     Node *head;
 
     Stack()
@@ -31,42 +30,46 @@ public:
         this->head = nullptr;
     }
 
-    void push(int value)
+    void push(int number)
     {
-        Node *newNode = new Node(value);
-        newNode->next = head;
-        head = newNode;
+        Node *newNode = new Node(number); // cria novo no
+        newNode->next = head; // o proximo no sera o valor de head
+        head = newNode; // o novo nó agora é head atual
     }
 
     void pop()
     {
         if (isEmpty())
         {
-            cout << "Pilha vazia" << endl;
+            cout << "A lista já está vazia!" << endl;
         }
+
         else
         {
             Node *current = head;
             head = head->next;
             delete current;
         }
+        
     }
 
     bool isEmpty()
     {
-        return head == nullptr;  // se o head for nulo vai retornar true
+        return head == nullptr;
     }
 
-    void showHead()
+    void printHead()
     {
         if (isEmpty())
         {
-            cout << "Pilha vazia" << endl;
+            cout << "A lista já está vazia!" << endl;
         }
+
         else
         {
-            cout << "Topo: " << head->getNumber() << endl;
+            cout << "Topo: " << head->getNumber() << endl; 
         }
+        
     }
 
     void clear()
@@ -81,20 +84,13 @@ public:
 int main()
 {
     Stack stack;
-
-    stack.push(1);
-    stack.push(2);
-    stack.push(3);
-
-    stack.showHead();
+    stack.push(7);
+    stack.printHead();
+    stack.push(9);
+    stack.printHead();
     stack.pop();
-    stack.showHead();
-    stack.pop();
-    stack.showHead();
-    stack.pop();
-    stack.showHead();
-
+    stack.printHead();
     stack.clear();
-
+    
     return 0;
 }
