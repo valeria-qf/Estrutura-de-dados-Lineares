@@ -23,15 +23,23 @@ class Node
 
 class Deque
 {
+    private:
+    int dequeSize;
+
     public:
     Node *head;
     Node *tail;
-    int size;
+
     Deque()
     {
         this->head = nullptr;
         this->tail = nullptr;
-        this->size = 0;
+        this->dequeSize = 0;
+    }
+
+    int getDequeSize()
+    {
+        return dequeSize;
     }
 
     bool isEmpty()
@@ -55,7 +63,7 @@ class Deque
             head = newNode; // o head agora aponta para novo nó
         }
 
-        size++;
+        dequeSize++;
     }
 
     void popFront()
@@ -81,7 +89,7 @@ class Deque
                 tail = nullptr;
             }
 
-            size--;
+            dequeSize--;
         }
     }
 
@@ -101,7 +109,7 @@ class Deque
             tail = newNode;
         }
 
-        size++;   
+        dequeSize++;   
     }
 
     void popBack()
@@ -127,15 +135,11 @@ class Deque
                head = nullptr;
             }
             
-            size--;
+            dequeSize--;
         }
         
     }
 
-    int dequeSize()
-    {   
-        return size;
-    }
 
     int firstElement()
     {
@@ -155,7 +159,7 @@ class Deque
     {
         if(isEmpty())
         {
-            cout << "O deque está vazio";
+            cout << "O deque está vazio" << endl;
             return -1;
         }
 
@@ -193,6 +197,8 @@ class Deque
             popFront();
         }
     }
+
+    
 };
 
 int main()
@@ -212,12 +218,10 @@ int main()
 
     deque.pushFront(5);
 
-    int dequeSize = deque.dequeSize();
-    cout << "\nTamanho do deque: " << dequeSize << endl;
+    int size = deque.getDequeSize();
+    cout << "\nTamanho do deque: " << size << endl;
 
     deque.popFront();
-    
-   
 
     cout << "\n----------------------------" << endl;
     deque.printDeque();
