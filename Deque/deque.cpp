@@ -26,10 +26,12 @@ class Deque
     public:
     Node *head;
     Node *tail;
+    int size;
     Deque()
     {
         this->head = nullptr;
         this->tail = nullptr;
+        this->size = 0;
     }
 
     bool isEmpty()
@@ -52,6 +54,8 @@ class Deque
             head->previous = newNode; // o nó anterior ao antigo head agora será o novo nó
             head = newNode; // o head agora aponta para novo nó
         }
+
+        size++;
     }
 
     void popFront()
@@ -76,8 +80,28 @@ class Deque
             {
                 tail = nullptr;
             }
-        
+
+            size--;
         }
+    }
+
+    void pushBack(int numberToPush)
+    {   
+        Node *newNode = new Node(numberToPush);
+        if (isEmpty())
+        {
+            head = newNode;
+            tail = newNode;
+        }
+
+        else
+        {   
+            tail->next = newNode;
+            newNode->previous = tail;
+            tail = newNode;
+        }
+
+        size++;   
     }
 
     void popBack()
@@ -103,39 +127,63 @@ class Deque
                head = nullptr;
             }
             
+            size--;
         }
         
     }
 
-    void pushBack(int numberToPush)
+    int dequeSize()
     {   
-        Node *newNode = new Node(numberToPush);
-        if (isEmpty())
+        return size;
+    }
+
+    int firstElement()
+    {
+        if(isEmpty())
         {
-            head = newNode;
-            tail = newNode
+            cout << "O deque está vazio";
+            return -1;
         }
 
         else
-        {   
-            tail->next = newNode;
-            newNode->previous = tail;
-            tail = newNode;
+        {
+            return head->getNumber();
         }
-        
+    }
+
+    int lastElement()
+    {
+        if(isEmpty())
+        {
+            cout << "O deque está vazio";
+            return -1;
+        }
+
+        else
+        {
+            return tail->getNumber();
+        }
     }
 
     void printDeque()
-    {
-        Node *current = head;
-
-        while(current != nullptr)
-        {   
-            cout << current->getNumber() << endl;
-            current = current->next;
+    {   
+        if (isEmpty())
+        {
+            cout << "\nDeque vazio" << endl;
         }
 
-        cout << endl;
+        else
+        {
+            Node *current = head;
+
+            while(current != nullptr)
+            {   
+                cout << current->getNumber() << " ";
+                current = current->next;
+            }
+
+            cout << endl;
+        }
     }
 
     void clearDeque()
@@ -146,3 +194,35 @@ class Deque
         }
     }
 };
+
+int main()
+{
+    Deque deque;
+
+    deque.pushFront(10);
+    int first = deque.firstElement();
+    deque.pushBack(4);
+    cout << "\nPrimeiro elemento: " << first << endl;
+
+    deque.pushBack(1);
+    deque.popBack();
+
+    int last = deque.lastElement();
+    cout << "Ultimo elemento: " << last << endl;
+
+    deque.pushFront(5);
+
+    int dequeSize = deque.dequeSize();
+    cout << "\nTamanho do deque: " << dequeSize << endl;
+
+    deque.popFront();
+    
+   
+
+    cout << "\n----------------------------" << endl;
+    deque.printDeque();
+    deque.clearDeque();
+    deque.printDeque();
+
+    return 0;
+}
