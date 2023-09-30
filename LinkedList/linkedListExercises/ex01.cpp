@@ -136,7 +136,7 @@ class List
     void modifyNodeNumbers(int newFirstNumber, int newSecondNumber)
     {   
         Node *newNode = new Node(newFirstNumber, newSecondNumber);
-        newNode->next = head; // o próximo nó será o antigo head
+        newNode->next = head; // o próximo nó será o antigo 
         head = newNode;
         if(newNode != nullptr)
         {
@@ -151,7 +151,7 @@ class List
     }
 
     void getNextNumber(Node *node)
-{
+    {
     Node *current = head;
     while (current != nullptr)
     {
