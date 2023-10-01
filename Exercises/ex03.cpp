@@ -131,7 +131,7 @@ class Stack // LIFO
         }
     }
 
-    void sizeofStack()
+    void getSize()
     {
         int size = getStackSize();
         cout << "\nTamanho da pilha: " << size << endl;
@@ -163,7 +163,7 @@ int main()
     // stack.popFront();
     stack.printStack();
     // stack.showTop();
-    stack.sizeofStack();
+    stack.getSize();
     return 0;
 }
 
