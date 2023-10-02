@@ -114,18 +114,14 @@ class Queue // FIFO - entra no fim, sai no começo
         if (isEmpty())
         {
             cout << "\nA fila está vazia!" << endl;
+            tail = nullptr;
         }
 
         else
         {
             Node *temp = head;
             setHead(head->getNext());
-            queueSize--;
-
-            if (head == nullptr)
-            {
-                tail = nullptr;
-            }      
+            queueSize--;    
         }     
     }
 
