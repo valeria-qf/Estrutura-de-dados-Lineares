@@ -110,22 +110,7 @@ class Stack
         }
           
     }
-
-    void print()
-    {
-        if(!isEmpty())
-        {
-            Node *current = head;
-            while (current != nullptr)
-            {
-                cout << current->parenthesis << " ";
-                current = current->next;
-            }
-            cout << endl;     
-        }
-    }
 };
-
 
 int main()
 {
@@ -135,8 +120,6 @@ int main()
     string expression;
     cin >> expression;
     stack.verifyParenthesis(expression);
-    cout << endl;
-    stack.print();
 
     return 0;
 }
