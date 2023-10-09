@@ -122,44 +122,38 @@ class Queue
         cout << current->number << " ";
     }
 
-    void splitQueue()
-{
-    if (isEmpty())
+    void splitQueue(Queue &firstQueue,Queue &secondQueue)
     {
-        cout << "A fila está vazia." << endl;
-        return;
+        if (isEmpty())
+        {
+            cout << "A fila está vazia." << endl;
+            return;
+        }
+
+        Node *current = head;
+        Node *previous = nullptr;
+
+        for (int i = 0; i < size / 2; i++)
+        {
+            previous = current;
+            current = current->getNext();
+        }
+
+        secondQueue.head = current;
+        secondQueue.size = size - size / 2;
+
+        if (previous != nullptr) // ajusta fila 1
+        {
+            previous->setNext(nullptr);
+        }
+
+        firstQueue.head = head;
+        firstQueue.size = size - secondQueue.size;
+
+        head = nullptr;
+        size = 0;
+
     }
-
-    Node *current = head;
-    Node *previous = nullptr;
-
-    for (int i = 0; i <= size / 2; i++)
-    {
-        previous = current;
-        current = current->getNext();
-    }
-
-    Queue firstQueue, secondQueue;
-
-    secondQueue.head = current;
-    secondQueue.size = size - size / 2;
-
-    if (previous != nullptr) // ajusta fila 1
-    {
-        previous->setNext(nullptr);
-    }
-
-    firstQueue.head = head;
-    firstQueue.size = size / 2;
-
-    head = nullptr;
-    size = 0;
-
-    cout << "Primeira fila:" << endl;
-    firstQueue.print();
-    cout << "Segunda fila:" << endl;
-    secondQueue.print();
-}
 
 };
 
@@ -170,10 +164,20 @@ int main()
 
     queue.pushBack(10);
     queue.pushBack(20);
+    queue.pushBack(10);
+    queue.pushBack(5);
+    queue.pushBack(8);
     // queue.print();
     // queue.printReverse();
     // queue.popFront();
     // queue.print();
-    queue.splitQueue();
+    Queue firstQueue, secondQueue;
+    queue.splitQueue(firstQueue, secondQueue);
+    cout << "Primeira fila:" << endl;
+    firstQueue.print();
+    cout << "tamanho primeira fila:"<< firstQueue.size << endl;
+    cout << "Segunda fila:" << endl;
+    secondQueue.print();
+    cout << "tamanho segunda fila:"<< secondQueue.size << endl;
     return 0;
 }
