@@ -3,12 +3,11 @@ using namespace std;
 
 class Node
 {
-    private:
+private:
     int number;
     Node *next;
-    
 
-    public:
+public:
     Node(int number)
     {
         this->number = number;
@@ -39,11 +38,11 @@ class Node
 
 class List
 {
-    private:
+private:
     Node *head;
     int sizeList;
 
-    public:
+public:
     List()
     {
         this->head = nullptr;
@@ -52,7 +51,7 @@ class List
 
     ~List()
     {
-        while(!isEmpty())
+        while (!isEmpty())
         {
             popBack();
         }
@@ -77,7 +76,7 @@ class List
     {
         Node *newNode = new Node(numberToPush);
 
-        if(isEmpty())
+        if (isEmpty())
         {
             setHead(newNode);
         }
@@ -85,7 +84,7 @@ class List
         else
         {
             Node *current = head;
-            while(current->getNext() != nullptr)
+            while (current->getNext() != nullptr)
             {
                 current = current->getNext();
             }
@@ -97,10 +96,10 @@ class List
     void popBack()
     {
         if (!isEmpty())
-        {   
+        {
             Node *current = head;
             Node *previous = nullptr; // precisa declarar o previous por que o próximo elemento do ultimo nó deve apontar para nulo
-            while(current->getNext() != nullptr)
+            while (current->getNext() != nullptr)
             {
                 previous = current; // armazena o ultimo elemento
                 current = current->getNext();
@@ -117,36 +116,36 @@ class List
 
     void removeDuplicates()
     {
+        Node *aux = nullptr;
         Node *current = head;
-
-        while (current != nullptr) // enquanto o atual for diferente de nulo
+        while (current != nullptr)
         {
-            Node *aux = current;
-            while(aux->getNext() != nullptr) // enquanto o próximo for diferente de nulo
+            aux = current;
+            while (aux->getNext() != nullptr)
             {
-                if(aux->getNext()->getNumber() == current->getNumber()) // se o próximo numero for igual ao numero atual
+                if (aux->getNext()->getNumber() == current->getNumber())
                 {
-                    Node *duplicate = aux->getNext(); // o proximo numero é armazenado em um temporario
-                    aux->setNext(aux->getNext()->getNext()); // o proximo numero do aux agora será o próximo número do próximo número
-                    delete duplicate;
-                    sizeList--;
+                    Node *temp = aux->getNext();
+                    aux->setNext(aux->getNext()->getNext());
+
+                    delete temp;
                 }
 
-                else // se não houver duplicatas, passa para o proximo numero
+                else
                 {
                     aux = aux->getNext();
                 }
             }
-            current = current->getNext(); // avança para o próximo
+            current = current->getNext();
         }
     }
-     void printList()
-    {   
+    void printList()
+    {
         if (!isEmpty())
         {
             cout << "\nImprimindo..." << endl;
             Node *current = head;
-            while(current != nullptr)
+            while (current != nullptr)
             {
                 cout << current->getNumber() << " ";
                 current = current->getNext();
@@ -158,7 +157,6 @@ class List
             cout << "List vazio!";
         }
     }
-
 };
 
 int main()
