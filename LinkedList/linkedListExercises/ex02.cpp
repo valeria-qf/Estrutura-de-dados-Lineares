@@ -128,18 +128,8 @@ class List
                 current = current->getNext();
             }
 
-            if (previous != nullptr) // se o previous nao for nulo
-            {
-                previous->setNext(current->getNext()); // o proximo elemento agora sera o next
-            }
-
-            else
-            {
-                head = current->getNext(); // se o previous for nulo, o head da lista agora será o next
-            }
-            
-            delete current; // remove o current
-            
+            previous->setNext(current->getNext()); // o proximo elemento agora sera o next
+            delete current; // remove o current 
         }
         
     }   
@@ -263,7 +253,6 @@ void splitList(List &firstHalf, List &secondHalf)
     head = nullptr;
     size = 0;
 }
-
 };
 
 int main()
@@ -274,15 +263,15 @@ int main()
 
     list.pushFront(10);
     list.pushFront(4);
-    list.pushBack(1);
-    list.pushMiddle(5);
-    list.pushBack(0);
-    // list.print();
-    // list.popMiddle();
+    list.pushFront(1);
+    list.pushFront(5);
+    list.pushFront(5);
     list.print();
-    list.splitList(A, B);
-    A.print();
-    B.print();
+    list.popMiddle();
+    list.print();
+    // list.splitList(A, B);
+    // A.print();
+    // B.print();
 
     return 0;
 }
