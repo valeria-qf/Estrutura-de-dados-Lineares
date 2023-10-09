@@ -133,7 +133,7 @@ class Queue
     Node *current = head;
     Node *previous = nullptr;
 
-    for (int i = 0; i < size / 2; i++)
+    for (int i = 0; i <= size / 2; i++)
     {
         previous = current;
         current = current->getNext();
@@ -144,7 +144,7 @@ class Queue
     secondQueue.head = current;
     secondQueue.size = size - size / 2;
 
-    if (previous != nullptr)
+    if (previous != nullptr) // ajusta fila 1
     {
         previous->setNext(nullptr);
     }

@@ -126,7 +126,6 @@ class Deque
         {
             Node *temp = head;
             setHead(head->getNext());
-            delete temp;
 
             if (head != nullptr)
             {
@@ -137,6 +136,8 @@ class Deque
             {
                 setTail(nullptr);
             }
+
+            delete temp;
             dequeSize--;
         }
 
@@ -170,7 +171,7 @@ class Deque
         if (!isEmpty())
         {
             Node *temp = tail;
-            tail->setPrevious(tail);
+            tail = tail->getPrevious();
             delete temp;
 
             if (tail != nullptr)

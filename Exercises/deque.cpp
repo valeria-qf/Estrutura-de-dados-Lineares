@@ -33,18 +33,61 @@ class Deque
         return head == nullptr || tail == nullptr;
     }
 
-    void pushBack(int numberToPushBack)
+    void pushFront(int numberToPush)
     {
-        Node *newNode = new Node(numberToPushBack);
-        if (isEmpty())
+        Node *newNode = new Node(numberToPush);
+        if(isEmpty())
         {
-            head = tail = newNode;
+            head = newNode;
+            tail = newNode;
+        }
+
+        else
+        {
+            newNode->next = head;
+            head->previous = newNode;
+            head = newNode;
+        }
+    }
+
+    void popFront()
+    {
+        if(isEmpty())
+        {
+            cout << "vazio" << endl;
+        }
+
+        else
+        {
+            Node *temp = head;
+            head = head->next;
+
+            if(head != nullptr)
+            {
+                head->previous = nullptr;
+            }
+
+            else
+            {
+                tail = nullptr;
+            }
+            delete temp;
+        }
+    }
+
+    void pushBack(int numberToPush)
+    {
+        Node *newNode = new Node(numberToPush);
+        if(isEmpty())
+        {
+            head = newNode;
+            tail = newNode;
         }
 
         else
         {
             tail->next = newNode;
-            tail->previous = tail;
+            newNode->previous = tail;
             tail = newNode;
         }
     }
@@ -53,59 +96,25 @@ class Deque
     {
         if (isEmpty())
         {
-            cout << "esta vazio" << endl;
-            head = nullptr;
-
+            cout << "vazio" << endl;
         }
 
         else
-        {
+        {   
             Node *temp = tail;
             tail = tail->previous;
-            delete temp;
 
-            if (tail != nullptr)
+            if(tail != nullptr)
             {
                 tail->next = nullptr;
             }
-        }
-        
-    }
 
-    void pushFront(int number)
-    {
-        Node *newNode = new Node(number);
-        if (isEmpty())
-        {
-            head = tail = newNode;
-        }
-
-        else
-        {
-            newNode->next = head;
-            head->previous = newNode;
-            head = newNode;
-        }      
-    }
-
-    void popFront()
-    {
-        if (isEmpty())
-        {
-            cout << "vazio" << endl;
-            tail = nullptr;
-        }
-
-        else
-        {
-            Node *temp = head;
-            head = head->next;
-            delete temp;
-
-            if(head != nullptr)
+            else
             {
-                head->previous = nullptr;
+                head = nullptr;
             }
+
+            delete temp;
         }
         
     }
