@@ -3,37 +3,59 @@ using namespace std;
 
 class Node
 {
-    public:
-    int number;
+    private:
     Node *next;
 
+    public:
+    int number;
     Node(int number)
     {
-        this->number = number;
         this->next = nullptr;
+        this->number = number;
+    }
+
+    Node *getNext()
+    {
+        return next;
+    }
+
+    void setNext(Node *newNext) 
+    {
+        this->next = newNext;
     }
 };
 
 class Queue
 {
-    public:
+    private:
     Node *head;
     Node *tail;
 
+    public:
+    int size;
     Queue()
     {
         this->head = nullptr;
         this->tail = nullptr;
+        this->size = 0;
+    }
+
+    ~Queue()
+    {
+        while(!isEmpty())
+        {
+            popFront();
+        }
     }
 
     bool isEmpty()
     {
-        return head == nullptr || tail == nullptr;
+        return head == nullptr;
     }
-        
-    void pushBack(int number)
+
+    void pushBack(int numberToPush)
     {
-        Node *newNode = new Node(number);
+        Node *newNode = new Node(numberToPush);
         if (isEmpty())
         {
             head = newNode;
@@ -42,27 +64,116 @@ class Queue
 
         else
         {
-            tail->next = newNode;
-            tail = newNode;
-
+           tail->setNext(newNode);
+           tail = newNode;
         }
+        size++;
     }
 
     void popFront()
     {
-        if (isEmpty())
+        if(isEmpty())
         {
             cout << "vazio" << endl;
-            tail = nullptr;
         }
 
         else
         {
             Node *temp = head;
-            head = head->next;
+            head = head->getNext();
             delete temp;
+            
+            if(head == nullptr)
+            {
+                tail = nullptr;
+            }
         }
-        
     }
+
+    void print()
+    {
+        if (!isEmpty())
+        {
+            Node *current = head;
+            while (current != nullptr)
+            {
+                cout << current->number << " ";
+                current = current->getNext();
+            }
+            cout << endl;
+        }
+    }
+
+    void printReverse()
+    {
+        Node *current = head;
+        revert(current);
+        cout << endl;
+    }
+
+    void revert(Node *current)
+    {
+        if (current == nullptr)
+        {
+            return;
+        }
+
+        revert(current->getNext());
+        cout << current->number << " ";
+    }
+
+    void splitQueue()
+{
+    if (isEmpty())
+    {
+        cout << "A fila está vazia." << endl;
+        return;
+    }
+
+    Node *current = head;
+    Node *previous = nullptr;
+
+    for (int i = 0; i < size / 2; i++)
+    {
+        previous = current;
+        current = current->getNext();
+    }
+
+    Queue firstQueue, secondQueue;
+
+    secondQueue.head = current;
+    secondQueue.size = size - size / 2;
+
+    if (previous != nullptr)
+    {
+        previous->setNext(nullptr);
+    }
+
+    firstQueue.head = head;
+    firstQueue.size = size / 2;
+
+    head = nullptr;
+    size = 0;
+
+    cout << "Primeira fila:" << endl;
+    firstQueue.print();
+    cout << "Segunda fila:" << endl;
+    secondQueue.print();
+}
+
 };
 
+int main()
+{
+    Queue queue;
+
+
+    queue.pushBack(10);
+    queue.pushBack(20);
+    // queue.print();
+    // queue.printReverse();
+    // queue.popFront();
+    // queue.print();
+    queue.splitQueue();
+    return 0;
+}

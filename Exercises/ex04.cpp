@@ -121,6 +121,7 @@ class Queue // FIFO - entra no fim, sai no começo
         {
             Node *temp = head;
             setHead(head->getNext());
+            delete temp;
             queueSize--;    
         }     
     }
