@@ -49,7 +49,7 @@ h1 {
 .cell {
     width: 60px;
     height: 60px;
-    border: 0.5px solid rgba(185, 185, 185, 0.59);
+    border: 0.5px solid rgb(227, 227, 227);
     background-color: white;
 }
 

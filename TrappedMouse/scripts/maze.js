@@ -12,41 +12,48 @@ document.addEventListener("DOMContentLoaded", function () {
         [1, 0, 0, 1, 0],
         [1, 1, 0, 1, 1],
     ];
-    let mouse = `<img id="mouse" src="img/mouse.png" alt="ilustration of a mouse">`;
-    let cheese = `<img id="cheese" src="/img/cheese.png" alt="ilustration of a cheese slice">`;
-    let maze = document.getElementById("maze-container");
+    let mazeArray = level1;
+    let levelSelect = document.getElementById("level-select");
+    let mouse = document.getElementById("mouse");
+    let cheese = document.getElementById("cheese");
     ;
-    let mazearray = level1;
-    let levelselect = document.getElementById("levelselect");
-    if (levelselect) {
-        levelselect.addEventListener("change", function () {
-            let level = levelselect.value;
-            if (level == "1") {
-                mazearray = level1;
-            }
-            else if (level == "2") {
-                mazearray = level2;
-            }
-            drawMaze();
-        });
+    let maze = document.getElementById("maze-container");
+    function setMousePosition(x, y) {
+        mouse.style.top = x + "px";
+        mouse.style.left = y + "px";
     }
-    function drawMaze() {
-        if (maze) {
-            maze.innerHTML = mouse + cheese;
-            for (let i = 0; i < mazearray.length; i++) {
-                let row = document.createElement("div");
-                row.classList.add("row");
-                for (let j = 0; j < mazearray[i].length; j++) {
-                    let cell = document.createElement("div");
-                    cell.classList.add("cell");
-                    if (mazearray[i][j] == 0) {
-                        cell.classList.add("wall");
-                    }
-                    row.appendChild(cell);
-                }
-                maze.appendChild(row);
-            }
+    function setCheesePosition(x, y) {
+        cheese.style.bottom = x + "px";
+        cheese.style.right = y + "px";
+    }
+    levelSelect.addEventListener("change", function () {
+        let level = levelSelect.value;
+        if (level == "1") {
+            mazeArray = level1;
         }
+        else if (level == "2") {
+            mazeArray = level2;
+        }
+        let mouseImage = `<img id="mouse" src="img/mouse.png" alt="ilustration of a mouse">`;
+        let cheeseImage = `<img id="cheese" src="/img/cheese.png" alt="ilustration of a cheese slice">`;
+        maze.innerHTML = mouseImage + cheeseImage;
+        drawMaze();
+    });
+    function drawMaze() {
+        for (let i = 0; i < mazeArray.length; i++) {
+            let row = document.createElement("div");
+            row.classList.add("row");
+            for (let j = 0; j < mazeArray[i].length; j++) {
+                let cell = document.createElement("div");
+                cell.classList.add("cell");
+                if (mazeArray[i][j] == 0) {
+                    cell.classList.add("wall");
+                }
+                row.appendChild(cell);
+            }
+            maze.appendChild(row);
+        }
+        setMousePosition(0, 0);
     }
     drawMaze();
 });
