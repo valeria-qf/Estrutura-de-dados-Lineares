@@ -1,0 +1,69 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+    color: rgb(218, 127, 36);
+}
+
+#mouse {
+    height: 60px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#cheese {
+    height: 60px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+#maze-container {
+    border: 8px solid black;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    height: max-content;
+}
+
+.row {
+    display: flex;
+}
+
+.cell {
+    width: 60px;
+    height: 60px;
+    border: 0.5px solid rgba(185, 185, 185, 0.59);
+    background-color: white;
+}
+
+.wall {
+    background-color: black;
+    border-color: black;
+}
+
+select {
+    width: 150px;
+    border-radius: 10px;
+    border: 2px solid  black;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 700;
+}
