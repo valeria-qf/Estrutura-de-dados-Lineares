@@ -59,11 +59,35 @@ h1 {
 }
 
 select {
-    width: 150px;
+    width: 130px;
     border-radius: 10px;
-    border: 2px solid  black;
+    border: 2px solid black;
     padding: 10px;
     margin-bottom: 20px;
     font-size: 14px;
     font-weight: 700;
+}
+
+
+#custom-file-button {
+    display: none;
+    /* Esconder o input original */
+}
+
+.custom-file-button-label {
+    width: 130px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: rgb(218, 127, 36);
+    color: #fff;
+    text-align: center;
+    display: inline-block;
+}
+
+.custom-file-button-label:hover {
+    opacity: 90%
 }

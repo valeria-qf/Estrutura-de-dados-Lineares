@@ -14,10 +14,19 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
     let mazeArray = level1;
     let levelSelect = document.getElementById("level-select");
-    let mouse = document.getElementById("mouse");
-    let cheese = document.getElementById("cheese");
-    ;
     let maze = document.getElementById("maze-container");
+    let mouse;
+    let cheese;
+    // Adicionar o mouse e o queijo uma única vez
+    mouse = createImage("mouse", "img/mouse.png", "ilustration of a mouse");
+    cheese = createImage("cheese", "img/cheese.png", "ilustration of a cheese slice");
+    function createImage(id, src, alt) {
+        let image = document.createElement("img");
+        image.id = id;
+        image.src = src;
+        image.alt = alt;
+        return image;
+    }
     function setMousePosition(x, y) {
         mouse.style.top = x + "px";
         mouse.style.left = y + "px";
@@ -34,26 +43,26 @@ document.addEventListener("DOMContentLoaded", function () {
         else if (level == "2") {
             mazeArray = level2;
         }
-        let mouseImage = `<img id="mouse" src="img/mouse.png" alt="ilustration of a mouse">`;
-        let cheeseImage = `<img id="cheese" src="/img/cheese.png" alt="ilustration of a cheese slice">`;
-        maze.innerHTML = mouseImage + cheeseImage;
         drawMaze();
     });
     function drawMaze() {
-        for (let i = 0; i < mazeArray.length; i++) {
+        // Limpar o conteúdo do labirinto antes de redesenhá-lo
+        maze.innerHTML = "";
+        maze.appendChild(mouse);
+        maze.appendChild(cheese);
+        for (let rows = 0; rows < mazeArray.length; rows++) {
             let row = document.createElement("div");
             row.classList.add("row");
-            for (let j = 0; j < mazeArray[i].length; j++) {
+            for (let columns = 0; columns < mazeArray[rows].length; columns++) {
                 let cell = document.createElement("div");
                 cell.classList.add("cell");
-                if (mazeArray[i][j] == 0) {
+                if (mazeArray[rows][columns] == 0) {
                     cell.classList.add("wall");
                 }
                 row.appendChild(cell);
             }
             maze.appendChild(row);
         }
-        setMousePosition(0, 0);
     }
     drawMaze();
 });

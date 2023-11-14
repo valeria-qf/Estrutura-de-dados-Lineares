@@ -15,60 +15,66 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let mazeArray: number[][] = level1;
     let levelSelect = document.getElementById("level-select") as HTMLSelectElement;
-    let mouse= document.getElementById("mouse") as HTMLImageElement;
-    let cheese = document.getElementById("cheese") as HTMLImageElement;;
     let maze = document.getElementById("maze-container") as HTMLDivElement;
+    let mouse: HTMLImageElement;
+    let cheese: HTMLImageElement;
 
+    // Adicionar o mouse e o queijo uma única vez
+    mouse = createImage("mouse", "img/mouse.png", "ilustration of a mouse");
+    cheese = createImage("cheese", "img/cheese.png", "ilustration of a cheese slice");
+
+    function createImage(id: string, src: string, alt: string): HTMLImageElement {
+        let image = document.createElement("img");
+        image.id = id;
+        image.src = src;
+        image.alt = alt;
+        return image;
+    }
 
     function setMousePosition(x: number, y: number) {
-            mouse.style.top = x + "px"
-            mouse.style.left = y + "px"
+        mouse.style.top = x + "px";
+        mouse.style.left = y + "px";
     }
 
     function setCheesePosition(x: number, y: number) {
-        cheese.style.bottom = x + "px"
-        cheese.style.right = y + "px"
+        cheese.style.bottom = x + "px";
+        cheese.style.right = y + "px";
     }
 
-
     levelSelect.addEventListener("change", function () {
-        let level: string = levelSelect.value
+        let level: string = levelSelect.value;
         if (level == "1") {
             mazeArray = level1;
-        }
-
-        else if (level == "2") {
+        } else if (level == "2") {
             mazeArray = level2;
         }
 
-        let mouseImage: string = `<img id="mouse" src="img/mouse.png" alt="ilustration of a mouse">`;
-        let cheeseImage: string = `<img id="cheese" src="/img/cheese.png" alt="ilustration of a cheese slice">`;
-        maze.innerHTML = mouseImage + cheeseImage
-        drawMaze()
-
-    })
+        drawMaze();
+    });
 
 
     function drawMaze(): void {
+        
+        maze.innerHTML = "";
+        maze.appendChild(mouse);
+        maze.appendChild(cheese);
 
-
-
-        for (let i = 0; i < mazeArray.length; i++) {
+        for (let rows = 0; rows < mazeArray.length; rows++) {
             let row: HTMLDivElement = document.createElement("div");
             row.classList.add("row");
 
-            for (let j = 0; j < mazeArray[i].length; j++) {
+            for (let columns = 0; columns < mazeArray[rows].length; columns++) {
                 let cell: HTMLDivElement = document.createElement("div");
                 cell.classList.add("cell");
 
-                if (mazeArray[i][j] == 0) {
+                if (mazeArray[rows][columns] == 0) {
                     cell.classList.add("wall");
                 }
                 row.appendChild(cell);
             }
             maze.appendChild(row);
         }
-        setMousePosition(0, 0)
     }
-    drawMaze()
+
+    drawMaze();
 });
