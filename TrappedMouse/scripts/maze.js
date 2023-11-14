@@ -1,19 +1,6 @@
 "use strict";
 document.addEventListener("DOMContentLoaded", function () {
-    const level1 = [
-        [1, 0, 1, 0],
-        [1, 1, 1, 1],
-        [1, 0, 1, 0],
-        [1, 0, 1, 1],
-    ];
-    const level2 = [
-        [1, 0, 1, 0, 1],
-        [1, 1, 1, 1, 1],
-        [1, 0, 0, 1, 0],
-        [1, 1, 0, 1, 1],
-    ];
-    let mazeArray = level1;
-    const levelSelect = document.getElementById("level-select");
+    let mazeArray;
     let maze = document.getElementById("maze-container");
     let mouse;
     let cheese;
@@ -26,6 +13,32 @@ document.addEventListener("DOMContentLoaded", function () {
         image.alt = alt;
         return image;
     }
+    const fileInput = document.getElementById("maze-file");
+    fileInput.addEventListener("change", handleFile);
+    function handleFile(event) {
+        var _a;
+        const target = event.target;
+        const file = (_a = target.files) === null || _a === void 0 ? void 0 : _a[0]; // se files for null returna undefined
+        if (file) {
+            readFile(file);
+        }
+    }
+    function readFile(file) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            if (event.target) {
+                const content = event.target.result;
+                processFileContent(content);
+            }
+        };
+        reader.readAsText(file);
+    }
+    function processFileContent(content) {
+        const lines = content.split(/\r\n/).map(line => line.trim());
+        const chars = lines.map(line => line.split(''));
+        mazeArray = chars;
+        drawMaze();
+    }
     function setMousePosition(x, y) {
         mouse.style.top = x + "px";
         mouse.style.left = y + "px";
@@ -34,33 +47,28 @@ document.addEventListener("DOMContentLoaded", function () {
         cheese.style.bottom = x + "px";
         cheese.style.right = y + "px";
     }
-    levelSelect.addEventListener("change", function () {
-        const level = levelSelect.value;
-        if (level == "1") {
-            mazeArray = level1;
-        }
-        else if (level == "2") {
-            mazeArray = level2;
-        }
-        drawMaze();
-    });
+    ;
     function drawMaze() {
         maze.innerHTML = "";
-        maze.appendChild(mouse);
-        maze.appendChild(cheese);
         for (let rows = 0; rows < mazeArray.length; rows++) {
             const row = document.createElement("div");
             row.classList.add("row");
             for (let columns = 0; columns < mazeArray[rows].length; columns++) {
                 const cell = document.createElement("div");
                 cell.classList.add("cell");
-                if (mazeArray[rows][columns] == 0) {
+                if (mazeArray[rows][columns] == '1') {
                     cell.classList.add("wall");
+                }
+                if (mazeArray[rows][columns] == 'm') {
+                    cell.appendChild(mouse);
+                }
+                else if (mazeArray[rows][columns] == 'e') {
+                    cell.appendChild(cheese);
                 }
                 row.appendChild(cell);
             }
             maze.appendChild(row);
         }
+        maze.style.display = "block";
     }
-    drawMaze();
 });
