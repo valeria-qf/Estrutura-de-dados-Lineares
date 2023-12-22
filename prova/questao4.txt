@@ -1,0 +1,1 @@
+As colisões acontecem quando o calculo da chave hash de um item coincide com a hash de outro item. Esse problema pode ser resolvido com o encadeamento desses itens por meio de estruturas como listas, vetores, pilhas etc. Então naquele mesmo hash serão armazenados esses elementos que colidem entre si e para encontrar cada um é só percorrer essa estrutura menor.

@@ -50,7 +50,7 @@ class Inventory:
         print(self.inventory_hash[product.get_item_code()])
 
     def remove_item(self, product: Item):
-        self._inventory_hash.pop(product.get_item_code())
+        self.inventory_hash.pop(product.get_item_code())
 
     def update_item(self, product: Item):
 
